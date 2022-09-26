@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+}
+
+header {
+    padding: 1em;
+    text-align: center;
+}
+
+main{
+    display: grid;
+    grid-template-rows: 1fr 8fr 1fr;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 1em;
+}
+
+.score-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    text-align: center;
+}
+
+button {
+    width: 150px;
+    height: 60px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+}
+
+.game-grid {
+    display: grid;
+    padding: 1em;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+    justify-content: center;
+    text-align: center;
+}
+
+.game-grid > div {
+    display:grid;
+    border-bottom: 3px solid goldenrod;
+    border-left: 3px solid goldenrod;
+}
+
+.game-grid > :nth-child(1), .game-grid > :nth-child(4), .game-grid > :nth-child(7)  {
+    border-left: none;
+}
+
+.game-grid > :nth-child(n+7) {
+    border-bottom: none;
