@@ -20,9 +20,16 @@ const gameBoardModule = (function () {
     const array = gameBoardModule.gameBoard;
     const gameGrid = document.querySelectorAll(".game-grid");
 
-    for (let i=0; i<array.length; i++) {
-        gameGrid[i].textContent = array[i];
-    }
-})()
-    
+    gameGrid.forEach(item => item.addEventListener("click", addMark));      
 
+    function addMark () {
+        for (let i=0; i<array.length; i++) {
+            if ((gameGrid[i].id === this.id) && (array[i] === "X")) {
+                gameGrid[i].innerHTML = "<img src=/home/stalloyde/repos/tictactoe/close_FILL0_wght700_GRAD0_opsz48.svg height=190 width=190>";
+            } else if 
+            ((gameGrid[i].id === this.id) && (array[i] === "O")) {
+                gameGrid[i].innerHTML = "<img src=/home/stalloyde/repos/tictactoe/circle_FILL0_wght700_GRAD0_opsz48.svg height=150 width=150>";
+            }
+        };
+    };
+})();

@@ -5,6 +5,7 @@
 }
 
 body {
+    padding: 1em;
     display: grid;
 }
 
@@ -39,7 +40,7 @@ button {
     justify-content: center;
 }
 
-.game-grid {
+.game-container {
     display: grid;
     padding: 1em;
     grid-template-columns: repeat(3, 200px);
@@ -48,15 +49,18 @@ button {
     text-align: center;
 }
 
-.game-grid > div {
+.game-grid {
     display:grid;
     border-bottom: 3px solid goldenrod;
     border-left: 3px solid goldenrod;
+    align-items: center;
+    justify-content: center;
 }
 
-.game-grid > :nth-child(1), .game-grid > :nth-child(4), .game-grid > :nth-child(7)  {
+.game-container > :nth-child(1), .game-container > :nth-child(4), .game-container > :nth-child(7)  {
     border-left: none;
 }
 
-.game-grid > :nth-child(n+7) {
+.game-container > :nth-child(n+7) {
     border-bottom: none;
+}
