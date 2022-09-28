@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-size: 18px;    
 }
 
 body {
@@ -28,6 +29,10 @@ main{
     grid-template-columns: 1fr 1fr;
     align-items: center;
     text-align: center;
+}
+
+.button {
+    margin: 1em;
 }
 
 button {
