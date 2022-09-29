@@ -43,14 +43,14 @@ const renderGameBoard = (() => {
 
     function addMark () {
         if (currentPlayer === p1) { 
-            this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/cross.svg height=150 width=150>";
+            this.innerHTML = "<img src=cross.svg height=150 width=150>";
             this.onclick = this.removeEventListener("click", addMark);
             currentPlayer = p2;
             playerTurn(p2);
             arrayP1.push(Number(this.id));
         } else if
             (currentPlayer === p2) {
-                this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/circle.svg height=120 width=120>";
+                this.innerHTML = "<img src=circle.svg height=120 width=120>";
                 this.onclick = this.removeEventListener("click", addMark);
                 currentPlayer = p1;
                 playerTurn(p1);
