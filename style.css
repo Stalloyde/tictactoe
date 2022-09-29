@@ -1,8 +1,10 @@
 * {
+    background-color: black;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: 18px;    
+    color: white;
 }
 
 body {
@@ -36,6 +38,10 @@ main{
 }
 
 button {
+    background-color:violet;
+    color: black;
+    outline: 1px inset white;
+    border-radius: 10px;
     width: 150px;
     height: 60px;
 }
