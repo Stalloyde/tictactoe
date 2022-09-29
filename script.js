@@ -31,10 +31,11 @@ const renderGameBoard = (() => {
         } else {
             item.style.backgroundColor = "rgb(12, 236, 221)";
         }
-    } ))
+    }));
+    
     gameGrid.forEach(item => item.addEventListener("mouseout", function () {
         item.style.backgroundColor = "black";
-    } ))
+    }))
     
     function playerTurn (player) {
         caption.textContent = `${player.name}'s (${player.playerNumber}) Turn`;
@@ -42,14 +43,14 @@ const renderGameBoard = (() => {
 
     function addMark () {
         if (currentPlayer === p1) { 
-            this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/close_FILL0_wght700_GRAD0_opsz48.svg height=150 width=150>";
+            this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/cross.svg height=150 width=150>";
             this.onclick = this.removeEventListener("click", addMark);
             currentPlayer = p2;
             playerTurn(p2);
             arrayP1.push(Number(this.id));
         } else if
             (currentPlayer === p2) {
-                this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/circle_FILL0_wght700_GRAD0_opsz48.svg height=120 width=120>";
+                this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/circle.svg height=120 width=120>";
                 this.onclick = this.removeEventListener("click", addMark);
                 currentPlayer = p1;
                 playerTurn(p1);
@@ -78,11 +79,11 @@ const renderGameBoard = (() => {
             for (x in threeInARow) {
                 if (threeInARow[x].every(item => arrayP1.includes(item))) {
                     endRound(p1);
-                    p1Score.innerHTML += "<img src=food-orange-svgrepo-com.svg width=40 height=40>"
+                    p1Score.innerHTML += "<img src=orange.svg width=40 height=40>"
                 } else if
                 (threeInARow[x].every(item => arrayP2.includes(item))) {
                     endRound(p2);
-                    p2Score.innerHTML += "<img src=food-orange-svgrepo-com.svg width=40 height=40>"
+                    p2Score.innerHTML += "<img src=orange.svg width=40 height=40>"
                 }
             };
 
