@@ -25,6 +25,16 @@ const renderGameBoard = (() => {
     const gameGrid = document.querySelectorAll(".game-grid");
     let currentPlayer = p1;
     gameGrid.forEach(item => item.addEventListener("click", addMark));      
+    gameGrid.forEach(item => item.addEventListener("mouseover", function () {
+        if (currentPlayer === p1) {
+            item.style.backgroundColor = "rgb(255, 103, 231)";
+        } else {
+            item.style.backgroundColor = "rgb(12, 236, 221)";
+        }
+    } ))
+    gameGrid.forEach(item => item.addEventListener("mouseout", function () {
+        item.style.backgroundColor = "black";
+    } ))
     
     function playerTurn (player) {
         caption.textContent = `${player.name}'s (${player.playerNumber}) Turn`;
