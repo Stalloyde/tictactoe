@@ -1,5 +1,7 @@
-const caption = document.querySelector("p");
+const caption = document.getElementById("caption");
 const newGame = document.querySelector("button");
+const p1Score = document.getElementById("p1Score");
+const p2Score = document.getElementById("p2Score");
 
 //create players using factory functions
 const createPlayer = (name, playerNumber, marking) => {
@@ -24,19 +26,23 @@ const renderGameBoard = (() => {
     let currentPlayer = p1;
     gameGrid.forEach(item => item.addEventListener("click", addMark));      
     
+    function playerTurn (player) {
+        caption.textContent = `${player.name}'s (${player.playerNumber}) Turn`;
+    }
+
     function addMark () {
         if (currentPlayer === p1) { 
-            this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/close_FILL0_wght700_GRAD0_opsz48.svg height=190 width=190>";
+            this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/close_FILL0_wght700_GRAD0_opsz48.svg height=150 width=150>";
             this.onclick = this.removeEventListener("click", addMark);
             currentPlayer = p2;
-            caption.textContent = `Player 2's turn`;
+            playerTurn(p2);
             arrayP1.push(Number(this.id));
         } else if
             (currentPlayer === p2) {
-                this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/circle_FILL0_wght700_GRAD0_opsz48.svg height=150 width=150>";
+                this.innerHTML = "<img src=/home/stalloyde/repos/tictactoe/circle_FILL0_wght700_GRAD0_opsz48.svg height=120 width=120>";
                 this.onclick = this.removeEventListener("click", addMark);
                 currentPlayer = p1;
-                caption.textContent = `Player 1's turn`
+                playerTurn(p1);
                 arrayP2.push(Number(this.id));
             };
 
@@ -54,7 +60,7 @@ const renderGameBoard = (() => {
 
             function endRound (player) {
                 gameGrid.forEach(item => item.removeEventListener("click", addMark));
-                console.log(`${player.playerNumber}: ${player.name} wins`);
+                caption.textContent = `${player.name} (${player.playerNumber}) Wins!`;
                 roundWinner = player;
             };
             
@@ -62,14 +68,16 @@ const renderGameBoard = (() => {
             for (x in threeInARow) {
                 if (threeInARow[x].every(item => arrayP1.includes(item))) {
                     endRound(p1);
+                    p1Score.innerHTML += "<img src=food-orange-svgrepo-com.svg width=40 height=40>"
                 } else if
                 (threeInARow[x].every(item => arrayP2.includes(item))) {
                     endRound(p2);
+                    p2Score.innerHTML += "<img src=food-orange-svgrepo-com.svg width=40 height=40>"
                 }
             };
 
             if ((arrayP1.length + arrayP2.length === 9) && (roundWinner.name === undefined)) {
-                console.log("TIE");
+                caption.textContent = 'Tie Game!';
             };
         })();
     };
@@ -81,7 +89,7 @@ const renderGameBoard = (() => {
         arrayP1.splice(0, arrayP1.length);
         arrayP2.splice(0, arrayP2.length);
         currentPlayer = p1; 
-        caption.textContent = `Player 1's turn`;
+        playerTurn(p1);
         gameGrid.forEach(item => item.addEventListener("click", addMark));    
     };
 
