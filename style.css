@@ -14,9 +14,56 @@
 }
 
 body {
+    position: relative;
     height: 100vh;
     padding: 0.5em;
     display: grid;
+}
+
+body > div, body > main {
+    filter: blur(10px);
+}
+
+form {
+    position: absolute;
+    height: 80vh;
+    padding: 1em;
+    width: 80vw;
+    top: 10%;
+    left: 10%;
+    border-radius: 10px;
+    z-index: 1;
+    display: grid;
+}
+
+.p1-name, .p2-name{
+    gap: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+#p1-name, #p2-name {
+    border-radius: 10px;
+    padding: 1em;
+    height: 30px;
+    width: 200px;
+    background-color: black;
+    color: white;
+}
+
+#p1-name {
+    outline: 2px inset rgb(255, 103, 231);
+}
+
+#p2-name {
+    outline: 2px inset rgb(12, 236, 221);
 }
 
 .score-container {
@@ -54,6 +101,11 @@ button {
     border-radius: 10px;
     width: 200px;
     height: 60px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }
 
 .footer {
