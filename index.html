@@ -7,22 +7,20 @@
         <link rel="stylesheet" href="style.css">
         <link rel="icon" href="orange.svg">
     </head>
-    <form>
-        <div class="p1-name">
-            <img src="cross.svg" width="100" height="100"> <label for="p1-name">Player 1's Name:</label>
-            <input id="p1-name" type="text">
-        </div>
-        <br>
-        <div class="p2-name">
-            <img src="circle.svg" width="100" height="100"><label for="p2-name">Player 2's Name:</label>
-            <input id="p2-name" type="text">
-        </div>
-        
-        <div class="start-button">
-            <button>Start Game</button>
-        </div>
-    </form>
     <body>
+        <div class="form" action="" method="">
+            <div class="p1-name">
+                <img src="cross.svg" width="100" height="100"> <label for="p1-name">Player 1's Name:</label>
+                <input id="p1-name" type="text">
+            </div>
+            <div class="p2-name">
+                <img src="circle.svg" width="100" height="100"><label for="p2-name">Player 2's Name:</label>
+                <input id="p2-name" type="text">
+            </div>
+            <div class="start-button-container">
+                <button class="start-button">Start Game</button>
+            </div>
+        </div>
         <div class="score-container">
             <div>
             <h1>Player 1's Score</h1>
@@ -33,7 +31,7 @@
             <p id="p2Score"></p>
             </div>
         </div>
-        <main>
+        <main class="main">
             <p id="caption">Player 1's Turn</p>
             <div class="game-container">
                 <div id="0" class="game-grid"></div>
@@ -46,10 +44,10 @@
                 <div id="7" class="game-grid"></div>
                 <div id="8" class="game-grid"></div>
             </div>
-            <div class="button"><button>New Round</button></div>
+            <div class="new-round"><button>New Round</button></div>
         </main>
         <div class="footer">
            @ 2022 Ethan Chan
-        </div class="footer">  
+        </div>
     </body>
 </html>

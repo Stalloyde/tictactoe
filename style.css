@@ -14,28 +14,21 @@
 }
 
 body {
+    display: grid;
     position: relative;
     height: 100vh;
     padding: 0.5em;
+}
+
+.form {
     display: grid;
-}
-
-body > div, body > main {
-    filter: blur(10px);
-}
-
-form {
+    grid-template-rows: 150px 150px 0.5fr;
+    align-content: center;
     position: absolute;
-    height: 80vh;
-    padding: 1em;
-    width: 80vw;
-    top: 10%;
-    left: 10%;
-    border-radius: 10px;
-    z-index: 1;
-    display: grid;
-    grid-template-rows: repeat(3, 200px);
+    height: 100%;
+    width: 100%;
 }
+
 
 .p1-name, .p2-name{
     gap: 1em;
@@ -44,16 +37,17 @@ form {
     align-items: center;
 }
 
-.start-button {
-    display: flex;
+.start-button-container {
+    display: grid;
+    grid-template-rows: 300px;
     justify-content: center;
-    margin-top: 100px;
+    align-items: center;
 }
 
 #p1-name, #p2-name {
     border-radius: 10px;
     padding: 1em;
-    height: 30px;
+    height: 40px;
     width: 200px;
     background-color: black;
     color: white;
@@ -91,7 +85,7 @@ main{
     padding: 0.5em;
 }
 
-.button {
+.new-round {
     padding: 0.6em;
 }
 
