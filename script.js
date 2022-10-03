@@ -7,6 +7,9 @@ const newGame = document.querySelector(".new-round");
 const startGameBtn = document.querySelector(".start-button");
 const startGame = document.querySelector(".start-button");
 const form = document.querySelector(".form");
+const p1ScoreHeader = document.querySelector(".p1Score-header");
+const p2ScoreHeader = document.querySelector(".p2Score-header");
+
 let p1Name = "";
 let p2Name = "";
 
@@ -16,8 +19,6 @@ startGame.addEventListener("click", () => {
     p2Name = p2Input.value;
     renderGameBoard();
 });
-
-
 
 //create an array of gameBoard
 const gameBoardModule = (function () {
@@ -38,15 +39,17 @@ const renderGameBoard = () => {
     const p1 = createPlayer(p1Name, "Player 1", "X");
     const p2 = createPlayer(p2Name, "Player 2", "O");
 
-    const gameGrid = document.querySelectorAll(".game-grid");
+    p1ScoreHeader.textContent = `${p1Name}'s Score`;
+    p2ScoreHeader.textContent = `${p2Name}'s Score`;
     let currentPlayer = p1;
+    appendPlayerTurn(p1);
+    
+    const gameGrid = document.querySelectorAll(".game-grid");
     gameGrid.forEach(item => item.addEventListener("click", addMark));      
     gameGrid.forEach(item => item.addEventListener("mouseover", function () {
         if (currentPlayer === p1) {
-            console.log(p1)
             item.style.backgroundColor = "rgb(255, 103, 231)";
         } else {
-            console.log(p2)
             item.style.backgroundColor = "rgb(12, 236, 221)";
         }
     }));
@@ -56,7 +59,7 @@ const renderGameBoard = () => {
     }))
     
     function appendPlayerTurn (player) {
-        caption.textContent = `${player.name}'s (${player.playerNumber}) Turn`;
+        caption.textContent = `${player.name}'s Turn`;
     }
     
     function addMark () {
@@ -89,7 +92,7 @@ const renderGameBoard = () => {
             
             function endRound (player) {
                 gameGrid.forEach(item => item.removeEventListener("click", addMark));
-                caption.textContent = `${player.name} (${player.playerNumber}) Wins!`;
+                caption.textContent = `${player.name} Wins!`;
                 roundWinner = player;
             };
             
