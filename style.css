@@ -61,6 +61,20 @@ body {
     outline: 2px inset rgb(12, 236, 221);
 }
 
+.p1Score-header {
+    background-color: rgb(255, 103, 231);
+    padding: 1em;
+    outline: 1px inset white;
+    color: black;
+}
+
+.p2Score-header {
+    background-color: rgb(12, 236, 221);
+    padding: 1em;
+    outline: 1px inset white;
+    color: black;
+}
+
 .score-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
