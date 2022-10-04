@@ -81,7 +81,7 @@ body {
 
 .main-container {
     display: grid;
-    grid-template-rows: 50px 850px 100px;
+    grid-template-rows: 100px 850px 100px;
 }
 
 .score-container {
