@@ -87,13 +87,13 @@ const renderGameBoard = () => {
     function addMark () {
         this.onclick = this.removeEventListener("click", addMark);
         if (currentPlayer === p1) { 
-            this.innerHTML = "<img src=cross.svg height=150 width=150>";
+            this.innerHTML = "<img src=./images/cross.svg height=150 width=150>";
             currentPlayer = p2;
             appendPlayerTurn(p2);
             arrayP1.push(Number(this.id));
         } else if
         (currentPlayer === p2) {
-            this.innerHTML = "<img src=circle.svg height=120 width=120>";
+            this.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
             currentPlayer = p1;           
             appendPlayerTurn(p1);
             arrayP2.push(Number(this.id));
@@ -121,11 +121,11 @@ const renderGameBoard = () => {
             for (x in threeInARow) {
                 if (threeInARow[x].every(item => arrayP1.includes(item))) {
                     endRound(p1);
-                    p1Score.innerHTML += "<img src=orange.svg width=40 height=40>"
+                    p1Score.innerHTML += "<img src=./images/orange.svg width=40 height=40>"
                 } else if
                 (threeInARow[x].every(item => arrayP2.includes(item))) {
                     endRound(p2);
-                    p2Score.innerHTML += "<img src=orange.svg width=40 height=40>"
+                    p2Score.innerHTML += "<img src=./images/orange.svg width=40 height=40>"
                 }
             };
             
