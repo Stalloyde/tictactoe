@@ -81,14 +81,13 @@ body {
 
 .main-container {
     display: grid;
-    grid-template-rows: 100px 850px 100px;
+    grid-template-rows: 100px 850px 50px;
 }
 
 .score-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: center;
-    align-items: center;
 }
 
 .score-container > div {
