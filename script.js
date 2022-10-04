@@ -3,7 +3,12 @@ const p1Score = document.getElementById("p1Score");
 const p2Score = document.getElementById("p2Score");
 const p1Input = document.getElementById("p1-name");
 const p2Input = document.getElementById("p2-name");
-const newGame = document.querySelector(".new-round");
+const BtnGameModePvp = document.getElementById("game-mode-pvp");
+const BtnGameModeAi = document.getElementById("game-mode-ai");
+const p1NameContainer = document.getElementById("p1-name-container");
+const p2NameContainer = document.getElementById("p2-name-container");
+const startBtnContainer = document.querySelector(".start-button-container");
+const newRound = document.querySelector(".new-round");
 const startGameBtn = document.querySelector(".start-button");
 const startGame = document.querySelector(".start-button");
 const form = document.querySelector(".form");
@@ -12,6 +17,23 @@ const p2ScoreHeader = document.querySelector(".p2Score-header");
 
 let p1Name = "";
 let p2Name = "";
+
+BtnGameModeAi.addEventListener("click", () => {
+    p1NameContainer.style.display = "flex";
+    p2NameContainer.style.display = "none";
+    startBtnContainer.style.display = "flex";
+    p2Name = "<img src=face_FILL0_wght400_GRAD0_opsz48.svg width=40 width=40>"
+    console.log(p2Name);
+})
+
+BtnGameModePvp.addEventListener("click", () => {
+    p1NameContainer.style.display = "flex";
+    p2NameContainer.style.display = "flex";
+    startBtnContainer.style.display = "flex";
+    p2Name = "";
+    console.log(p2Name);
+})
+
 
 startGame.addEventListener("click", () => {
     form.style.display ="none";
@@ -63,16 +85,15 @@ const renderGameBoard = () => {
     }
     
     function addMark () {
+        this.onclick = this.removeEventListener("click", addMark);
         if (currentPlayer === p1) { 
             this.innerHTML = "<img src=cross.svg height=150 width=150>";
-            this.onclick = this.removeEventListener("click", addMark);
             currentPlayer = p2;
             appendPlayerTurn(p2);
             arrayP1.push(Number(this.id));
         } else if
         (currentPlayer === p2) {
             this.innerHTML = "<img src=circle.svg height=120 width=120>";
-            this.onclick = this.removeEventListener("click", addMark);
             currentPlayer = p1;           
             appendPlayerTurn(p1);
             arrayP2.push(Number(this.id));
@@ -107,14 +128,14 @@ const renderGameBoard = () => {
                     p2Score.innerHTML += "<img src=orange.svg width=40 height=40>"
                 }
             };
-
+            
             if ((arrayP1.length + arrayP2.length === 9) && (roundWinner.name === undefined)) {
                 caption.textContent = 'Tie Game!';
             };
         })();
     };
     
-    newGame.addEventListener("click", reset);
+    newRound.addEventListener("click", reset);
         
     function reset () {
         gameGrid.forEach(item => item.innerHTML = "");
@@ -128,7 +149,6 @@ const renderGameBoard = () => {
     return {arrayP1, arrayP2, gameGrid, currentPlayer, addMark}
 
 };
-
 
 
 

@@ -9,45 +9,69 @@
     </head>
     <body>
         <div class="form">
-            <div class="p1-name">
-                <img src="cross.svg" width="100" height="100"> <label for="p1-name">Player 1's Name:</label>
-                <input id="p1-name" type="text">
+            <div class="game-mode-container">
+                Select Game Mode:   
+                <div>
+                    <div>
+                        <button id="game-mode-pvp">
+                            <img src="face_FILL0_wght400_GRAD0_opsz48.svg" width="40" width="40">1 VS <img src="face_FILL0_wght400_GRAD0_opsz48.svg" width="40" width="40">2
+                        </button>
+                    </div>
+                    <div>
+                        <button id="game-mode-ai">
+                        <img src="face_FILL0_wght400_GRAD0_opsz48.svg" width="40" width="40">1 VS <img src="smart_toy_FILL0_wght400_GRAD0_opsz48.svg" width="40" height="40" >
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="p2-name">
-                <img src="circle.svg" width="100" height="100"><label for="p2-name">Player 2's Name:</label>
-                <input id="p2-name" type="text">
+            
+            <div class="player-name-container">
+                <div id="p1-name-container">
+                    <img src="cross.svg" width="100" height="100">
+                    <label for="p1-name">Player 1's Name:</label>
+                    <input id="p1-name" type="text">
+                </div>
+                <div id="p2-name-container">
+                    <img src="circle.svg" width="100" height="100">
+                    <label for="p2-name">Player 2's Name:</label>
+                    <input id="p2-name" type="text">
+                </div>
             </div>
+
             <div class="start-button-container">
                 <button class="start-button">Start Game</button>
             </div>
         </div>
-        <div class="score-container">
-            <div>
-            <h1 class="p1Score-header"></h1>
-            <p id="p1Score"></p>
+        
+        <div class="main-container">
+            <div class="score-container">
+                <div>
+                    <h1 class="p1Score-header"></h1>
+                    <p id="p1Score"></p>
+                </div>
+                <div>
+                    <h1 class="p2Score-header"></h1>
+                    <p id="p2Score"></p>
+                </div>
             </div>
-            <div>
-            <h1 class="p2Score-header"></h1>
-            <p id="p2Score"></p>
+            <div class = game-grid-container>
+                <p id="caption"></p>
+                <div class="game-container">
+                    <div id="0" class="game-grid"></div>
+                    <div id="1" class="game-grid"></div>
+                    <div id="2" class="game-grid"></div>
+                    <div id="3" class="game-grid"></div>
+                    <div id="4" class="game-grid"></div>
+                    <div id="5" class="game-grid"></div>
+                    <div id="6" class="game-grid"></div>
+                    <div id="7" class="game-grid"></div>
+                    <div id="8" class="game-grid"></div>
+                </div>
+                <div class="new-round"><button>New Round</button></div>
             </div>
-        </div>
-        <main class="main">
-            <p id="caption"></p>
-            <div class="game-container">
-                <div id="0" class="game-grid"></div>
-                <div id="1" class="game-grid"></div>
-                <div id="2" class="game-grid"></div>
-                <div id="3" class="game-grid"></div>
-                <div id="4" class="game-grid"></div>
-                <div id="5" class="game-grid"></div>
-                <div id="6" class="game-grid"></div>
-                <div id="7" class="game-grid"></div>
-                <div id="8" class="game-grid"></div>
-            </div>
-            <div class="new-round"><button>New Round</button></div>
-        </main>
         <div class="footer">
            @ 2022 Ethan Chan
+        </div>
         </div>
     </body>
 </html>
