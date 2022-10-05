@@ -94,9 +94,9 @@ const renderGameBoard = () => {
     gameGrid.forEach(item => item.addEventListener("mouseover", function () {
         if (currentPlayer === p1) {
             item.style.backgroundColor = "rgb(255, 103, 231)";
-        } else {
+        } else if ((currentPlayer === p2) && (checkGameMode === "pvp")) {
             item.style.backgroundColor = "rgb(12, 236, 221)";
-        }
+        };
         item.style.transition = "all 0.3s";
     }));
     
@@ -110,18 +110,48 @@ const renderGameBoard = () => {
     
     function addMark () {
         this.onclick = this.removeEventListener("click", addMark);
-        if (currentPlayer === p1) { 
-            this.innerHTML = "<img src=./images/cross.svg height=150 width=150>";
-            currentPlayer = p2;
-            appendPlayerTurn(p2);
-            arrayP1.push(Number(this.id));
-        } else if
-        ((currentPlayer === p2) && (checkGameMode != "ai")) {
-            this.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
-            currentPlayer = p1;           
-            appendPlayerTurn(p1);
-            arrayP2.push(Number(this.id));
+
+        if (checkGameMode === "pvp") {
+            if (currentPlayer === p1) { 
+                this.innerHTML = "<img src=./images/cross.svg height=150 width=150>";
+                currentPlayer = p2;
+                appendPlayerTurn(p2);
+                arrayP1.push(Number(this.id));
+                console.log(currentPlayer)
+                console.log(checkGameMode)
+            } else if 
+            (currentPlayer === p2) {
+                this.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
+                currentPlayer = p1;           
+                appendPlayerTurn(p1);
+                arrayP2.push(Number(this.id));
+            };
         };
+
+        if (checkGameMode === "ai") {
+            if (currentPlayer === p1) { 
+                this.innerHTML = "<img src=./images/cross.svg height=150 width=150>";
+                currentPlayer = p2;
+                appendPlayerTurn(p2);
+                arrayP1.push(Number(this.id));
+                console.log(currentPlayer)
+                console.log(checkGameMode)
+            };
+
+            if (currentPlayer === p2) {
+                setTimeout(
+                    function () { 
+                        let gameGridArray = [];
+                        let randomNumber = (Math.floor(Math.random()*9));
+                        gameGrid.forEach(item => gameGridArray.push(item));
+                        currentPlayer = p1;
+                        appendPlayerTurn(p1);
+                        arrayP2.push(Number(gameGridArray[randomNumber].id));
+                        gameGridArray[randomNumber].innerHTML = "<img src=./images/circle.svg height=120 width=120>";
+                        console.log('sdasdasdas')
+            }, 100);
+        };
+    };
         
         (function determineWinner () {
             const threeInARow = {
@@ -173,9 +203,6 @@ const renderGameBoard = () => {
     newGameBtn.addEventListener("click", () => {
         location.reload();
     });
-};
-
-
-
+}
 
 
