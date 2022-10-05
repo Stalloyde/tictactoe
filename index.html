@@ -14,12 +14,12 @@
                 <div>
                     <div>
                         <button id="game-mode-pvp">
-                            <img src="./images/face.svg" width="40" width="40">1 VS <img src="./images/face.svg" width="40" width="40">2
+                            <img src="./images/face.svg" width="40" width="40"><span>P1</span> VS <img src="./images/face.svg" width="40" width="40"><span>P2</span>
                         </button>
                     </div>
                     <div>
                         <button id="game-mode-ai">
-                        <img src="./images/face.svg" width="40" width="40">1 VS <img src="./images/robot.svg" width="40" height="40" >
+                        <img src="./images/face.svg" width="40" width="40"><span>P1</span> VS <img src="./images/robot.svg" width="40" height="40"><span>AI</span>
                         </button>
                     </div>
                 </div>
@@ -29,12 +29,12 @@
                 <div id="p1-name-container">
                     <img src="./images/cross.svg" width="100" height="100">
                     <label for="p1-name">Player 1's Name:</label>
-                    <input id="p1-name" type="text">
+                    <input id="p1-name" type="text" placeholder="Player 1">
                 </div>
                 <div id="p2-name-container">
                     <img src="./images/circle.svg" width="100" height="100">
                     <label for="p2-name">Player 2's Name:</label>
-                    <input id="p2-name" type="text">
+                    <input id="p2-name" type="text" placeholder="Player 2">
                 </div>
             </div>
 
@@ -67,7 +67,10 @@
                     <div id="7" class="game-grid"></div>
                     <div id="8" class="game-grid"></div>
                 </div>
-                <div class="new-round"><button>New Round</button></div>
+                <div class="buttons">
+                    <div class="new-round"><button>New Round</button></div>
+                    <div class="new-game"><button>New Game</button></div>
+                </div>
             </div>
         <div class="footer">
            @ 2022 Ethan Chan

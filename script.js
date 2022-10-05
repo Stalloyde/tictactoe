@@ -14,31 +14,53 @@ const startGame = document.querySelector(".start-button");
 const form = document.querySelector(".form");
 const p1ScoreHeader = document.querySelector(".p1Score-header");
 const p2ScoreHeader = document.querySelector(".p2Score-header");
-
+//add New Game button function
 let p1Name = "";
 let p2Name = "";
+let checkGameMode = "";
 
 BtnGameModeAi.addEventListener("click", () => {
     p1NameContainer.style.display = "flex";
     p2NameContainer.style.display = "none";
     startBtnContainer.style.display = "flex";
-    p2Name = "<img src=face_FILL0_wght400_GRAD0_opsz48.svg width=40 width=40>"
-    console.log(p2Name);
+    form.style.gridTemplateRows = "1fr 500px 1fr";
+    checkGameMode = "ai";
 })
 
 BtnGameModePvp.addEventListener("click", () => {
     p1NameContainer.style.display = "flex";
     p2NameContainer.style.display = "flex";
     startBtnContainer.style.display = "flex";
+    form.style.gridTemplateRows = "1fr 500px 1fr";
     p2Name = "";
-    console.log(p2Name);
+    checkGameMode = "pvp";
 })
-
 
 startGame.addEventListener("click", () => {
     form.style.display ="none";
-    p1Name = p1Input.value;
-    p2Name = p2Input.value;
+    
+    if (checkGameMode === "pvp") { 
+        p1Name = p1Input.value;
+        p2Name = p2Input.value;
+
+        if (p1Name === "") {
+            p1Name = "Player 1";
+        };
+
+        if (p2Name === "") {
+            p2Name = "Player 2";
+        };
+    };
+
+    if (checkGameMode === "ai") {
+        p2Name = "AI Bot";
+        p1Name = p1Input.value;
+
+        if (p1Name === "") {
+            p1Name = "Player 1";
+        };
+    };
+
     renderGameBoard();
 });
 
@@ -74,6 +96,7 @@ const renderGameBoard = () => {
         } else {
             item.style.backgroundColor = "rgb(12, 236, 221)";
         }
+        item.style.transition = "all 0.3s";
     }));
     
     gameGrid.forEach(item => item.addEventListener("mouseout", function () {
@@ -92,7 +115,7 @@ const renderGameBoard = () => {
             appendPlayerTurn(p2);
             arrayP1.push(Number(this.id));
         } else if
-        (currentPlayer === p2) {
+        ((currentPlayer === p2) && (checkGameMode != "ai")) {
             this.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
             currentPlayer = p1;           
             appendPlayerTurn(p1);
@@ -121,11 +144,11 @@ const renderGameBoard = () => {
             for (x in threeInARow) {
                 if (threeInARow[x].every(item => arrayP1.includes(item))) {
                     endRound(p1);
-                    p1Score.innerHTML += "<img src=./images/orange.svg width=40 height=40>"
+                    p1Score.innerHTML += "<img src=./images/orange.svg width=60 height=60>"
                 } else if
                 (threeInARow[x].every(item => arrayP2.includes(item))) {
                     endRound(p2);
-                    p2Score.innerHTML += "<img src=./images/orange.svg width=40 height=40>"
+                    p2Score.innerHTML += "<img src=./images/orange.svg width=60 height=60>"
                 }
             };
             
