@@ -8,13 +8,14 @@ const BtnGameModeAi = document.getElementById("game-mode-ai");
 const p1NameContainer = document.getElementById("p1-name-container");
 const p2NameContainer = document.getElementById("p2-name-container");
 const startBtnContainer = document.querySelector(".start-button-container");
-const newRound = document.querySelector(".new-round");
+const newRoundBtn = document.querySelector(".new-round");
 const startGameBtn = document.querySelector(".start-button");
 const startGame = document.querySelector(".start-button");
 const form = document.querySelector(".form");
 const p1ScoreHeader = document.querySelector(".p1Score-header");
 const p2ScoreHeader = document.querySelector(".p2Score-header");
-//add New Game button function
+const newGameBtn = document.querySelector(".new-game");
+
 let p1Name = "";
 let p2Name = "";
 let checkGameMode = "";
@@ -101,11 +102,11 @@ const renderGameBoard = () => {
     
     gameGrid.forEach(item => item.addEventListener("mouseout", function () {
         item.style.backgroundColor = "black";
-    }))
+    }));
     
     function appendPlayerTurn (player) {
         caption.textContent = `${player.name}'s Turn`;
-    }
+    };
     
     function addMark () {
         this.onclick = this.removeEventListener("click", addMark);
@@ -158,7 +159,7 @@ const renderGameBoard = () => {
         })();
     };
     
-    newRound.addEventListener("click", reset);
+    newRoundBtn.addEventListener("click", reset);
         
     function reset () {
         gameGrid.forEach(item => item.innerHTML = "");
@@ -169,8 +170,9 @@ const renderGameBoard = () => {
         gameGrid.forEach(item => item.addEventListener("click", addMark));    
     };
     
-    return {arrayP1, arrayP2, gameGrid, currentPlayer, addMark}
-
+    newGameBtn.addEventListener("click", () => {
+        location.reload();
+    });
 };
 
 
