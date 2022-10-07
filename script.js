@@ -120,8 +120,6 @@ const renderGameBoard = () => {
                 currentPlayer = p2;
                 appendPlayerTurn(p2);
                 arrayP1.push(Number(this.id));
-                console.log(arrayP1)
-                console.log(arrayP2)
             } else if 
             (currentPlayer === p2) {
                 this.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
@@ -143,26 +141,31 @@ const renderGameBoard = () => {
                 setTimeout(
                     function () { 
 
-//need to remove event listener upon appending image of AIMove
+//determine winner
 //Refactor New Round to clear off arrays
 //Refactor code 
-                        const P1IndexToSplice = AiPossibleMovesArray.indexOf(arrayP1[arrayP1.length-1]);
-                        gameGridIdArray.splice(P1IndexToSplice,1);
-                        AiPossibleMovesArray.splice(P1IndexToSplice,1);
+                        function getAiPossibleMoves (playerArray) {
+                            const indexToSplice = AiPossibleMovesArray.indexOf(playerArray[playerArray.length-1]);
+                            gameGridIdArray.splice(indexToSplice,1);
+                            AiPossibleMovesArray.splice(indexToSplice,1);
+                        };                        
+
+                        getAiPossibleMoves(arrayP1);
                         const randomElement = Math.floor(Math.random()* gameGridIdArray.length);
-                        gameGridIdArray[randomElement].innerHTML = "<img src=./images/circle.svg height=120 width=120>";
-                        arrayP2.push(Number(gameGridIdArray[randomElement].id));
-                        const P2IndexToSplice = AiPossibleMovesArray.indexOf(arrayP2[arrayP2.length-1]);
-                        gameGridIdArray.splice(P2IndexToSplice,1);
-                        AiPossibleMovesArray.splice(P2IndexToSplice,1);                        
+
+                        (() => {
+                            const AiMoveNode = gameGridIdArray[randomElement];
+                            AiMoveNode.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
+                            AiMoveNode.removeEventListener("click",addMark);
+                            arrayP2.push(Number(AiMoveNode.id));
+                        })();
+
+                        getAiPossibleMoves(arrayP2);
                         currentPlayer = p1;
                         appendPlayerTurn(p1);
-            }, 650);
+                        }, 650);
+            };
         };
-    };
-
-
-// then randomly select one element from the array of number
 
         (function determineWinner () {
             const threeInARow = {
