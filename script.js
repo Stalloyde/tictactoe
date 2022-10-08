@@ -19,6 +19,7 @@ const newGameBtn = document.querySelector(".new-game");
 let p1Name = "";
 let p2Name = "";
 let checkGameMode = "";
+let roundWinner = "";
 
 BtnGameModeAi.addEventListener("click", () => {
     p1NameContainer.style.display = "flex";
@@ -120,12 +121,14 @@ const renderGameBoard = () => {
                 currentPlayer = p2;
                 appendPlayerTurn(p2);
                 arrayP1.push(Number(this.id));
+                determineWinner();
             } else if 
             (currentPlayer === p2) {
                 this.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
                 currentPlayer = p1;           
                 appendPlayerTurn(p1);
                 arrayP2.push(Number(this.id));
+                determineWinner();
             };
         };
 
@@ -135,15 +138,14 @@ const renderGameBoard = () => {
                 currentPlayer = p2;
                 appendPlayerTurn(p2);
                 arrayP1.push(Number(this.id));
+                determineWinner();
             };
-            //AI move unable to detect an occupied grid
+
             if (currentPlayer === p2) {
                 setTimeout(
                     function () { 
 
-//determine winner
-//Refactor New Round to clear off arrays
-//Refactor code 
+//smarter AI that blocks 3 in a row
                         function getAiPossibleMoves (playerArray) {
                             const indexToSplice = AiPossibleMovesArray.indexOf(playerArray[playerArray.length-1]);
                             gameGridIdArray.splice(indexToSplice,1);
@@ -155,59 +157,69 @@ const renderGameBoard = () => {
 
                         (() => {
                             const AiMoveNode = gameGridIdArray[randomElement];
-                            AiMoveNode.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
-                            AiMoveNode.removeEventListener("click",addMark);
-                            arrayP2.push(Number(AiMoveNode.id));
+                            if (roundWinner.name === undefined) {
+                                AiMoveNode.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
+                                AiMoveNode.removeEventListener("click",addMark);
+                                arrayP2.push(Number(AiMoveNode.id));
+                            } else if
+                            (roundWinner.name === p1) {
+                                AiMoveNode.innerHTML = "";
+                            };
                         })();
 
                         getAiPossibleMoves(arrayP2);
                         currentPlayer = p1;
                         appendPlayerTurn(p1);
-                        }, 650);
+                        determineWinner();
+                        }, 350);        
+                    
             };
         };
+};
 
-        (function determineWinner () {
-            const threeInARow = {
-                1: [0,1,2],
-                2: [0,3,6],
-                3: [0,4,8],
-                4: [1,4,7],
-                5: [2,5,8],
-                6: [3,4,5],
-                7: [6,7,8],
-                8: [2,4,6],
-            };
-            
-            function endRound (player) {
-                gameGrid.forEach(item => item.removeEventListener("click", addMark));
-                caption.textContent = `${player.name} Wins!`;
-                roundWinner = player;
-            };
-            
-            let roundWinner = "";
-            for (x in threeInARow) {
-                if (threeInARow[x].every(item => arrayP1.includes(item))) {
-                    endRound(p1);
-                    p1Score.innerHTML += "<img src=./images/orange.svg width=60 height=60>"
-                } else if
-                (threeInARow[x].every(item => arrayP2.includes(item))) {
-                    endRound(p2);
-                    p2Score.innerHTML += "<img src=./images/orange.svg width=60 height=60>"
-                }
-            };
-            
-            if ((arrayP1.length + arrayP2.length === 9) && (roundWinner.name === undefined)) {
-                caption.textContent = 'Tie Game!';
-            };
-        })();
+    function determineWinner () {
+        
+        const threeInARow = {
+            1: [0,1,2],
+            2: [0,3,6],
+            3: [0,4,8],
+            4: [1,4,7],
+            5: [2,5,8],
+            6: [3,4,5],
+            7: [6,7,8],
+            8: [2,4,6],
+        };
+        
+        function endRound (player) {
+            gameGrid.forEach(item => item.removeEventListener("click", addMark));
+            caption.textContent = `${player.name} Wins!`;
+            roundWinner = player;
+            currentPlayer = "";
+        };
+        
+        for (x in threeInARow) {
+            if (threeInARow[x].every(item => arrayP1.includes(item))) {
+                endRound(p1);
+                p1Score.innerHTML += "<img src=./images/orange.svg width=60 height=60>"
+            } else if
+            (threeInARow[x].every(item => arrayP2.includes(item))) {
+                endRound(p2);
+                p2Score.innerHTML += "<img src=./images/orange.svg width=60 height=60>"
+            }
+        };
+        
+        if ((arrayP1.length + arrayP2.length === 9) && (roundWinner.name === undefined)) {
+            caption.textContent = 'Tie Game!';
+        };
     };
     
     newRoundBtn.addEventListener("click", reset);
+//New Round to clear off arrays for AI
         
     function reset () {
         gameGrid.forEach(item => item.innerHTML = "");
-        arrayP1.splice(0, arrayP1.length);
+        roundWinner = "";
+        arrayP1.splice(0, arrayP1.length);g
         arrayP2.splice(0, arrayP2.length);
         currentPlayer = p1; 
         appendPlayerTurn(p1);
