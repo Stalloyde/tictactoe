@@ -83,8 +83,8 @@ const renderGameBoard = () => {
         return {name, playerNumber, marking};
     }
 
-    const p1 = createPlayer(p1Name, "Player 1", "X");
-    const p2 = createPlayer(p2Name, "Player 2", "O");
+    const p1 = createPlayer(p1Name, "Player 1", "<img src=./images/cross.svg height=150 width=150>");
+    const p2 = createPlayer(p2Name, "Player 2", "<img src=./images/circle.svg height=120 width=120>");
 
     p1ScoreHeader.textContent = `${p1Name}'s Score`;
     p2ScoreHeader.textContent = `${p2Name}'s Score`;
@@ -107,23 +107,19 @@ const renderGameBoard = () => {
         item.style.backgroundColor = "black";
     }));
     
-    function appendPlayerTurn (player) {
-        caption.textContent = `${player.name}'s Turn`;
-    };
-    
     function addMark () {
         this.onclick = this.removeEventListener("click", addMark);
 
         if (checkGameMode === "pvp") {
             if (currentPlayer === p1) { 
-                this.innerHTML = "<img src=./images/cross.svg height=150 width=150>";
+                this.innerHTML = p1.marking;
                 currentPlayer = p2;
                 appendPlayerTurn(p2);
                 arrayP1.push(Number(this.id));
                 determineWinner();
             } else if 
             (currentPlayer === p2) {
-                this.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
+                this.innerHTML = p2.marking;
                 currentPlayer = p1;           
                 appendPlayerTurn(p1);
                 arrayP2.push(Number(this.id));
@@ -133,7 +129,7 @@ const renderGameBoard = () => {
 
         if (checkGameMode === "ai") {
             if (currentPlayer === p1) { 
-                this.innerHTML = "<img src=./images/cross.svg height=150 width=150>";
+                this.innerHTML = p1.marking;
                 currentPlayer = p2;
                 appendPlayerTurn(p2);
                 arrayP1.push(Number(this.id));
@@ -156,7 +152,7 @@ const renderGameBoard = () => {
                         (() => {
                             const AiMoveNode = gameGridIdArray[randomElement];
                             if (roundWinner.name === undefined) {
-                                AiMoveNode.innerHTML = "<img src=./images/circle.svg height=120 width=120>";
+                                AiMoveNode.innerHTML = p2.marking;
                                 AiMoveNode.removeEventListener("click",addMark);
                                 arrayP2.push(Number(AiMoveNode.id));
                             } else if
@@ -170,7 +166,6 @@ const renderGameBoard = () => {
                         appendPlayerTurn(p1);
                         determineWinner();
                         }, 350);        
-                    
             };
         };
 };
