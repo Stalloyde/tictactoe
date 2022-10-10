@@ -66,7 +66,6 @@ startGame.addEventListener("click", () => {
     renderGameBoard();
 });
 
-//create an array of gameBoard
 const gameBoardModule = (function () {
     const gameBoardP1 = [];
     const gameBoardP2 = [];
@@ -75,11 +74,11 @@ const gameBoardModule = (function () {
 
 const arrayP1 = gameBoardModule.gameBoardP1;
 const arrayP2 = gameBoardModule.gameBoardP2;
-const AiPossibleMovesArray = [0,1,2,3,4,5,6,7,8];
-const gameGridIdArray = [];
 
 const renderGameBoard = () => {  
-    //create players using factory functions
+    let AiPossibleMovesArray = [0,1,2,3,4,5,6,7,8];
+    let gameGridIdArray = [];
+
     const createPlayer = (name, playerNumber, marking) => {
         return {name, playerNumber, marking};
     }
@@ -214,13 +213,16 @@ const renderGameBoard = () => {
     };
     
     newRoundBtn.addEventListener("click", reset);
-//New Round to clear off arrays for AI
-        
+
+//New Round to clear off arrays for AI    
     function reset () {
         gameGrid.forEach(item => item.innerHTML = "");
         roundWinner = "";
-        arrayP1.splice(0, arrayP1.length);g
+        arrayP1.splice(0, arrayP1.length);
         arrayP2.splice(0, arrayP2.length);
+        AiPossibleMovesArray = [0,1,2,3,4,5,6,7,8];
+        gameGridIdArray = [];
+        gameGrid.forEach(item => gameGridIdArray.push(item));
         currentPlayer = p1; 
         appendPlayerTurn(p1);
         gameGrid.forEach(item => item.addEventListener("click", addMark));    

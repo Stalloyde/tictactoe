@@ -174,10 +174,6 @@ button:hover {
     cursor: pointer;
 }
 
-.game-grid:active {
-    transform: scale(0.5);  
-}
-
 .game-container > :nth-child(1), .game-container > :nth-child(4), .game-container > :nth-child(7)  {
     border-left: none;
 }
