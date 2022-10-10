@@ -144,7 +144,6 @@ const renderGameBoard = () => {
                 setTimeout(
                     function () { 
 
-//smarter AI that blocks 3 in a row
                         function getAiPossibleMoves (playerArray) {
                             const indexToSplice = AiPossibleMovesArray.indexOf(playerArray[playerArray.length-1]);
                             gameGridIdArray.splice(indexToSplice,1);
@@ -214,7 +213,6 @@ const renderGameBoard = () => {
     
     newRoundBtn.addEventListener("click", reset);
 
-//New Round to clear off arrays for AI    
     function reset () {
         gameGrid.forEach(item => item.innerHTML = "");
         roundWinner = "";
