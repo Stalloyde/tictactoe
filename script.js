@@ -107,6 +107,10 @@ const renderGameBoard = () => {
         item.style.backgroundColor = "black";
     }));
     
+    function appendPlayerTurn (player) {
+        caption.textContent = `${player.name}'s Turn`;
+    };
+
     function addMark () {
         this.onclick = this.removeEventListener("click", addMark);
 
