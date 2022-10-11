@@ -15,6 +15,7 @@ const form = document.querySelector(".form");
 const p1ScoreHeader = document.querySelector(".p1Score-header");
 const p2ScoreHeader = document.querySelector(".p2Score-header");
 const newGameBtn = document.querySelector(".new-game");
+const gameGrid = document.querySelectorAll(".game-grid");
 
 let p1Name = "";
 let p2Name = "";
@@ -63,25 +64,19 @@ startGame.addEventListener("click", () => {
         };
     };
 
-    renderGameBoard();
+    gameBoardModule();
 });
 
-const gameBoardModule = (function () {
+const gameBoardModule = function () {
     const gameBoardP1 = [];
     const gameBoardP2 = [];
-    return {gameBoardP1, gameBoardP2};
-})();
-
-const arrayP1 = gameBoardModule.gameBoardP1;
-const arrayP2 = gameBoardModule.gameBoardP2;
-
-const renderGameBoard = () => {  
     let AiPossibleMovesArray = [0,1,2,3,4,5,6,7,8];
     let gameGridIdArray = [];
 
     const createPlayer = (name, playerNumber, marking) => {
-        return {name, playerNumber, marking};
-    }
+        const appendPlayerTurn = () => caption.textContent = `${name}'s Turn`;
+        return {name, playerNumber, marking, appendPlayerTurn};
+    };
 
     const p1 = createPlayer(p1Name, "Player 1", "<img src=./images/cross.svg height=150 width=150>");
     const p2 = createPlayer(p2Name, "Player 2", "<img src=./images/circle.svg height=120 width=120>");
@@ -89,9 +84,8 @@ const renderGameBoard = () => {
     p1ScoreHeader.textContent = `${p1Name}'s Score`;
     p2ScoreHeader.textContent = `${p2Name}'s Score`;
     let currentPlayer = p1;
-    appendPlayerTurn(p1);
+    p1.appendPlayerTurn();
     
-    const gameGrid = document.querySelectorAll(".game-grid");
     gameGrid.forEach(item => gameGridIdArray.push(item));
     gameGrid.forEach(item => item.addEventListener("click", addMark));      
     gameGrid.forEach(item => item.addEventListener("mouseover", function () {
@@ -107,10 +101,6 @@ const renderGameBoard = () => {
         item.style.backgroundColor = "black";
     }));
     
-    function appendPlayerTurn (player) {
-        caption.textContent = `${player.name}'s Turn`;
-    };
-
     function addMark () {
         this.onclick = this.removeEventListener("click", addMark);
 
@@ -118,15 +108,15 @@ const renderGameBoard = () => {
             if (currentPlayer === p1) { 
                 this.innerHTML = p1.marking;
                 currentPlayer = p2;
-                appendPlayerTurn(p2);
-                arrayP1.push(Number(this.id));
+                p2.appendPlayerTurn();
+                gameBoardP1.push(Number(this.id));
                 determineWinner();
             } else if 
             (currentPlayer === p2) {
                 this.innerHTML = p2.marking;
                 currentPlayer = p1;           
-                appendPlayerTurn(p1);
-                arrayP2.push(Number(this.id));
+                p1.appendPlayerTurn();
+                gameBoardP2.push(Number(this.id));
                 determineWinner();
             };
         };
@@ -135,8 +125,8 @@ const renderGameBoard = () => {
             if (currentPlayer === p1) { 
                 this.innerHTML = p1.marking;
                 currentPlayer = p2;
-                appendPlayerTurn(p2);
-                arrayP1.push(Number(this.id));
+                p2.appendPlayerTurn();
+                gameBoardP1.push(Number(this.id));
                 determineWinner();
             };
 
@@ -150,7 +140,7 @@ const renderGameBoard = () => {
                             AiPossibleMovesArray.splice(indexToSplice,1);
                         };                        
 
-                        getAiPossibleMoves(arrayP1);
+                        getAiPossibleMoves(gameBoardP1);
                         const randomElement = Math.floor(Math.random()* gameGridIdArray.length);
 
                         (() => {
@@ -158,16 +148,16 @@ const renderGameBoard = () => {
                             if (roundWinner.name === undefined) {
                                 AiMoveNode.innerHTML = p2.marking;
                                 AiMoveNode.removeEventListener("click",addMark);
-                                arrayP2.push(Number(AiMoveNode.id));
+                                gameBoardP2.push(Number(AiMoveNode.id));
                             } else if
                             (roundWinner.name === p1) {
                                 AiMoveNode.innerHTML = "";
                             };
                         })();
 
-                        getAiPossibleMoves(arrayP2);
+                        getAiPossibleMoves(gameBoardP2);
                         currentPlayer = p1;
-                        appendPlayerTurn(p1);
+                        p1.appendPlayerTurn();
                         determineWinner();
                         }, 350);        
             };
@@ -195,17 +185,17 @@ const renderGameBoard = () => {
         };
         
         for (x in threeInARow) {
-            if (threeInARow[x].every(item => arrayP1.includes(item))) {
+            if (threeInARow[x].every(item => gameBoardP1.includes(item))) {
                 endRound(p1);
                 p1Score.innerHTML += "<img src=./images/orange.svg width=60 height=60>"
             } else if
-            (threeInARow[x].every(item => arrayP2.includes(item))) {
+            (threeInARow[x].every(item => gameBoardP2.includes(item))) {
                 endRound(p2);
                 p2Score.innerHTML += "<img src=./images/orange.svg width=60 height=60>"
             }
         };
         
-        if ((arrayP1.length + arrayP2.length === 9) && (roundWinner.name === undefined)) {
+        if ((gameBoardP1.length + gameBoardP2.length === 9) && (roundWinner.name === undefined)) {
             caption.textContent = 'Tie Game!';
         };
     };
@@ -215,13 +205,13 @@ const renderGameBoard = () => {
     function reset () {
         gameGrid.forEach(item => item.innerHTML = "");
         roundWinner = "";
-        arrayP1.splice(0, arrayP1.length);
-        arrayP2.splice(0, arrayP2.length);
+        gameBoardP1.splice(0, gameBoardP1.length);
+        gameBoardP2.splice(0, gameBoardP2.length);
         AiPossibleMovesArray = [0,1,2,3,4,5,6,7,8];
         gameGridIdArray = [];
         gameGrid.forEach(item => gameGridIdArray.push(item));
         currentPlayer = p1; 
-        appendPlayerTurn(p1);
+        p1.appendPlayerTurn();
         gameGrid.forEach(item => item.addEventListener("click", addMark));    
     };
     
